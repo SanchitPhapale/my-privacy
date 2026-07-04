@@ -1,4 +1,4 @@
-require("dotenv").config();
+
 
 const express = require("express");
 const http = require("http");
@@ -8,13 +8,13 @@ const path = require("path");
 const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
 
-const connectDB = require("./config/database");
+
 const cors = require("cors");
 
 
 const app = express();
 app.use(cors());
-connectDB();
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
