@@ -1,9 +1,11 @@
 // Socket.IO connection - connect to backend server
 const SOCKET_URL =
-  window.location.hostname === "localhost"
-    ? "http://localhost:3600"
-    : "https://my-privacy-backend.onrender.com";
-    const API_URL = SOCKET_URL;
+    window.location.hostname === "localhost"
+        ? "http://localhost:3600"
+        : "https://my-privacy-backend.onrender.com";
+
+const API_URL = SOCKET_URL;
+
 let socketConnected = false;
 
 // User state
@@ -55,10 +57,10 @@ if (connectionStatus) {
 }
 
 const socket = io(SOCKET_URL, {
-  transports: ["websocket", "polling"],
-  reconnection: true,
-  reconnectionAttempts: 10,
-  reconnectionDelay: 1000,
+    transports: ["websocket", "polling"],
+    reconnection: true,
+    reconnectionAttempts: 10,
+    reconnectionDelay: 1000,
 });
 
 // Connection status handlers
