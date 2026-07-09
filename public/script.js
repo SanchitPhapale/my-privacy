@@ -2164,7 +2164,7 @@ function handleKeyboard() {
 
   // Do not move the input bar
 
-  
+
 
   // Only add extra space for messages
   messagesContainer.style.paddingBottom =
@@ -2189,13 +2189,9 @@ window.addEventListener("orientationchange", handleKeyboard);
 handleKeyboard();
 
 messageInput.addEventListener("focus", () => {
-
-    setTimeout(() => {
-
-        scrollToBottom();
-
-    },150);
-
+  requestAnimationFrame(() => {
+    scrollToBottom(true);
+  });
 });
 
 contextMenu.addEventListener("click", (e) => {
