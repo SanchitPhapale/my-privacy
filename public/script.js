@@ -2212,32 +2212,58 @@ document.addEventListener("touchstart", (e) => {
 // ==============================
 
 function updateChatPadding() {
-  const inputArea = document.querySelector(".input-area");
-  const messagesContainer = document.querySelector(".messages-container");
 
-  if (!inputArea || !messagesContainer) return;
+    const inputArea = document.querySelector(".input-area");
+    const messagesContainer = document.querySelector(".messages-container");
 
-  const height = inputArea.offsetHeight;
+    if (!inputArea || !messagesContainer) return;
 
-  messagesContainer.style.paddingBottom = height + 20 + "px";
+    const height = inputArea.offsetHeight;
+
+    messagesContainer.style.paddingBottom =
+        (height + 12) + "px";
+
 }
 
 window.addEventListener("load", updateChatPadding);
-window.addEventListener("resize", updateChatPadding);
 
-// Update when mobile keyboard changes viewport
+// Only update on orientation change
+window.addEventListener("orientationchange", () => {
+
+    setTimeout(updateChatPadding,300);
+
+});
+
+// Mobile keyboard support
 if (window.visualViewport) {
-  window.visualViewport.addEventListener("resize", updateChatPadding);
+
+    window.visualViewport.addEventListener("resize", () => {
+
+        requestAnimationFrame(() => {
+
+            updateChatPadding();
+
+            messagesContainer.scrollTop =
+                messagesContainer.scrollHeight;
+
+        });
+
+    });
+
 }
 
 function scrollToBottom() {
-  updateChatPadding();
 
-  requestAnimationFrame(() => {
-    messagesContainer.scrollTo({
-      top: messagesContainer.scrollHeight,
+    requestAnimationFrame(() => {
 
-      behavior: "smooth",
+        messagesContainer.scrollTo({
+
+            top: messagesContainer.scrollHeight,
+
+            behavior:"smooth"
+
+        });
+
     });
-  });
+
 }
