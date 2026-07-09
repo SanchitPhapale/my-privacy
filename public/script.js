@@ -100,7 +100,7 @@ const chatScreen = document.getElementById("chat-screen");
 const messagesContainer = document.getElementById("messages-container");
 const messagesDiv = document.getElementById("messages");
 const messageInput = document.getElementById("message-input");
-const messageInput = document.getElementById("message-input");
+
 
 // Mobile keyboard fix
 
