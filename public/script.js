@@ -103,13 +103,7 @@ const messageInput = document.getElementById("message-input");
 const messageInput = document.getElementById("message-input");
 
 // Mobile keyboard fix
-if (window.visualViewport) {
-    window.visualViewport.addEventListener("resize", () => {
-        requestAnimationFrame(() => {
-            scrollToBottom();
-        });
-    });
-}
+
 messageInput.addEventListener("input", function () {
   if (this.value.length === 1) {
     this.value = this.value.charAt(0).toUpperCase();
@@ -2269,6 +2263,7 @@ if (window.visualViewport) {
     });
 
 }
+
 function scrollToBottom() {
 
     requestAnimationFrame(() => {
