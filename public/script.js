@@ -1877,12 +1877,26 @@ messagesContainer.addEventListener("scroll", () => {
   }
 
   // 📱 WhatsApp keyboard close on scroll
-  if (
-    document.body.classList.contains("keyboard-open") &&
-    Math.abs(messagesContainer.scrollTop) > 10
-  ) {
-    messageInput.blur();
-  }
+ let isUserScrolling = false;
+
+messagesContainer.addEventListener("touchstart", () => {
+    isUserScrolling = true;
+});
+
+messagesContainer.addEventListener("touchend", () => {
+    setTimeout(() => {
+        isUserScrolling = false;
+    }, 100);
+});
+
+messagesContainer.addEventListener("scroll", () => {
+    if (
+        isUserScrolling &&
+        document.body.classList.contains("keyboard-open")
+    ) {
+        messageInput.blur();
+    }
+});
 });
 
 scrollBottomBtn.addEventListener("click", scrollToBottom);
