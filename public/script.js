@@ -100,6 +100,16 @@ const chatScreen = document.getElementById("chat-screen");
 const messagesContainer = document.getElementById("messages-container");
 const messagesDiv = document.getElementById("messages");
 const messageInput = document.getElementById("message-input");
+const messageInput = document.getElementById("message-input");
+
+// Mobile keyboard fix
+if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", () => {
+        requestAnimationFrame(() => {
+            scrollToBottom();
+        });
+    });
+}
 messageInput.addEventListener("input", function () {
   if (this.value.length === 1) {
     this.value = this.value.charAt(0).toUpperCase();
@@ -314,12 +324,21 @@ messageInput.addEventListener("input", () => {
 });
 
 messageInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter" && !e.shiftKey) {
-    e.preventDefault();
-    sendMessage();
-  }
-});
 
+    if (e.key === "Enter" && !e.shiftKey) {
+
+        e.preventDefault();
+
+        messageInput.setRangeText(
+            "\n",
+            messageInput.selectionStart,
+            messageInput.selectionEnd,
+            "end"
+        );
+
+    }
+
+});
 function adjustTextareaHeight() {
   messageInput.style.height = "auto";
   messageInput.style.height = Math.min(messageInput.scrollHeight, 120) + "px";
@@ -2243,15 +2262,13 @@ if (window.visualViewport) {
 
             updateChatPadding();
 
-            messagesContainer.scrollTop =
-                messagesContainer.scrollHeight;
+            scrollToBottom();
 
         });
 
     });
 
 }
-
 function scrollToBottom() {
 
     requestAnimationFrame(() => {
