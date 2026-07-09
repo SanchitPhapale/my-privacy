@@ -318,10 +318,23 @@ messageInput.addEventListener("input", () => {
 });
 
 messageInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-        sendMessage();
+
+    if (e.key === "Enter" && !e.shiftKey) {
+
+        e.preventDefault();
+
+        messageInput.setRangeText(
+            "\n",
+            messageInput.selectionStart,
+            messageInput.selectionEnd,
+            "end"
+        );
+
     }
+
 });
+
+
 function adjustTextareaHeight() {
   messageInput.style.height = "auto";
   messageInput.style.height = Math.min(messageInput.scrollHeight, 120) + "px";
