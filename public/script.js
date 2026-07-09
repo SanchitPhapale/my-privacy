@@ -2161,17 +2161,25 @@ function handleKeyboard() {
   document.body.classList.toggle("keyboard-open", keyboardOpen);
 
   if (keyboardOpen) {
-    inputArea.style.bottom = keyboardHeight + "px";
 
-    messagesContainer.style.paddingBottom =
-      keyboardHeight + inputArea.offsetHeight + 20 + "px";
+  // Do not move the input bar
 
-    scrollToBottom();
-  } else {
-    inputArea.style.bottom = "0px";
+  
 
-    messagesContainer.style.paddingBottom = inputArea.offsetHeight + 20 + "px";
-  }
+  // Only add extra space for messages
+  messagesContainer.style.paddingBottom =
+    inputArea.offsetHeight + keyboardHeight + 20 + "px";
+
+  scrollToBottom();
+
+} else {
+
+  inputArea.style.bottom = "0px";
+
+  messagesContainer.style.paddingBottom =
+    inputArea.offsetHeight + 20 + "px";
+
+}
 }
 
 window.visualViewport?.addEventListener("resize", handleKeyboard);
@@ -2181,9 +2189,13 @@ window.addEventListener("orientationchange", handleKeyboard);
 handleKeyboard();
 
 messageInput.addEventListener("focus", () => {
-  requestAnimationFrame(() => {
-    scrollToBottom(true);
-  });
+
+    setTimeout(() => {
+
+        scrollToBottom();
+
+    },150);
+
 });
 
 contextMenu.addEventListener("click", (e) => {

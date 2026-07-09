@@ -1540,10 +1540,13 @@ padding-bottom: 90px;
 
   .input-area {
     position: fixed;
+    bottom: 0;
     left: 0;
     right: 0;
     bottom: env(safe-area-inset-bottom, 0);
-    z-index: 1000;
+    z-index: 99999;
+      transform:none;
+      transition: none;
 }
 
 .chat-area {
